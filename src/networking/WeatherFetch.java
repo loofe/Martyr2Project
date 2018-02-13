@@ -1,19 +1,10 @@
 package networking;
 /*
 *24小时天气预报
-url：http://tj.nineton.cn/Heart/index/future24h/
-拼接参数：
-  city：城市
-  language：语言
-  key：秘钥，固定值 78928e706123c1a8f1766f062bc8676b。可不填。也可省略该参数
 
-作者：DROP_DATABASE
-链接：https://www.jianshu.com/p/e3e04cf3fc0f
-來源：简书
-Exp: http://tj.nineton.cn/Heart/index/future24h/?city=CHSH000000
-需要城市ID，但暂无城市ID接口。。。
-*
  */
+
+import net.sf.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -21,21 +12,51 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.HashMap;
+import java.util.Map;
 
 public class WeatherFetch {
 
     public static void main(String[] args) throws IOException {
         InputStreamReader isr = new InputStreamReader(System.in);
-        System.out.println("请输入要查询的城市编号");
+        System.out.println("请输入要查询的城市");
 
         BufferedReader br = new BufferedReader(isr);
-        String cityID = br.readLine();
+        String city = br.readLine();
         br.close();
-
-        URL url = new URL("http://tj.nineton.cn/Heart/index/future24h/?city="+cityID);
+        //CHSH000000
+        URL url = new URL("https://free-api.heweather.com/v5/now?city= "+city +
+                "&key=c3a5e12dc05648e4bfac00c0c3ce9a86");
         URLConnection hul = url.openConnection();
-        InputStream is = hul.getInputStream();
+
+        BufferedReader in = new BufferedReader(
+                new InputStreamReader(hul.getInputStream()));
+        String urlString = "";
+        String current;
+
+        while((current = in.readLine()) != null)
+        {
+            urlString += current;
+        }
+
+        System.out.println(urlString);
+        //JSONObject json = JSONObject.fromObject(urlString);
+
+        //涉及到json的多层解析，需要另外学习
 
 
+     /*   Map<String, Object> map = new HashMap<String, Object>();
+        // 最外层解析
+        JSONObject object = JSONObject.fromObject(urlString);
+        for (Object k : object.) {
+            Object v = object.get(k);
+            map.put(k.toString(), v);
+        }
+
+        //String text = JSONObject.fromObject(json.get("hourly")).get("text").toString();
+        //String country = JSONObject.fromObject(json.get("data")).get("country").toString();
+
+        System.out.println(" temperature : " +  " text: " + text);
+    */
     }
 }
