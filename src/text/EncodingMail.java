@@ -1,8 +1,11 @@
 package text;
 
 import java.util.Scanner;
+/*
+这是一个加密解密类，主要实现了左移一位的凯撒密码
 
-public class encoding {
+ */
+public class EncodingMail {
 
     public static void main(String[] args) {
 
@@ -13,8 +16,8 @@ public class encoding {
         String str = sc.nextLine();
         System.out.println(str);
 
-        String encoded =  encoding(str);
-        System.out.println(" encoding ：" + encoded);
+        String encoded =  encode(str);
+        System.out.println(" en coding Message ：" + encoded);
 
         System.out.println("decoding : " + decoding(encoded));
 
@@ -22,7 +25,7 @@ public class encoding {
     }
 
 
-    public static String encoding (String str) {
+    public static String encode (String str) {
         char[] content = str.toCharArray();
 
         for (int i = 0; i < content.length; i++) {

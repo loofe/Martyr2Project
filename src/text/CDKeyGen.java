@@ -3,6 +3,14 @@ package text;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+/*
+cd-key的实现方式如下：
+    1、凯撒密码加盐
+    2、hd5加盐
+    注：salt为某段系统时间
+    未完成
+ */
+
 public class CDKeyGen {
 
     public static String encoding( String str, long slat ) throws NoSuchAlgorithmException {
